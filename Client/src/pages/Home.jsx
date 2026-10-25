@@ -1,3 +1,5 @@
+import Navbar from "@/components/global/Navbar.jsx";
+
 function Home(){
     return(
         <div>
