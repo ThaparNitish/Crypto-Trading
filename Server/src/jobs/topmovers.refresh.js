@@ -10,12 +10,11 @@ export function startTopMoversRefreshJob() {
       console.log("[Job] Top Movers refreshed");
     } catch (error) {
       console.error("[Job] Market refresh failed:", error.message);
+    } finally{
+      setInterval(refresh, REFRESH_INTERVAL)
     }
   };
 
   // call when the server starts
   refresh();
-
-  // Refresh ever 30s
-  setInterval(refresh, REFRESH_INTERVAL);
 }

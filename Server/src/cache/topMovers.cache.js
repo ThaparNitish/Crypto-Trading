@@ -40,6 +40,10 @@ export async function refreshTopMoversCache(fetchTopMovers) {
     try {
       const data = await fetchTopMovers();
 
+      if (!Array.isArray(data) || data.length === 0) {
+        throw new Error("Invalid or empty Top Movers result");
+      }
+
       cache.set(CACHE_KEY, data, CACHE_TTL);
 
       console.log("[Cache] UPDATED");
