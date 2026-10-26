@@ -1,38 +1,22 @@
-
-const express = require("express");
-const cors = require("cors");
-require("dotenv").config();
+import "dotenv/config";
+import express from "express";
+import cors from "cors";
+import cryptoRoutes from "./routes/crypto.routes.js"
+import { startMarketRefresh } from "./jobs/topmovers.refresh.js";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
+startMarketRefresh()
+
 
 app.get("/", (req, res) => {
   res.json({ message: "Crypto API is running" });
 });
 
-app.get("/api/crypto/price", async (req, res) => {
-  try {
-    const response = await fetch(
-      `${process.env.BINANCE_BASE_URL}/api/v3/ticker/price?symbol=BTCUSDT`
-    );
-
-    if (!response.ok) {
-      return res.status(response.status).json({
-        error: "Binance API request failed",
-      });
-    }
-
-    const data = await response.json();
-    res.json(data);
-  } catch (error) {
-    res.status(502).json({
-      error: "Unable to reach Binance",
-    });
-  }
-});
+app.use("/api/crypto", cryptoRoutes);
 
 
 const PORT = process.env.PORT || 5000;
