@@ -16,7 +16,7 @@ export async function get24HourTicker() {
     throw error;
   }
 
-  return response.json();
+  return await response.json();
   }catch(error){
     if (error.name === "TimeoutError") {
       const timeoutError = new Error("Market data request timed out.");
