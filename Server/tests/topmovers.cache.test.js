@@ -1,6 +1,7 @@
 
 import { test, beforeEach } from "node:test";
 import assert from "node:assert/strict";
+import "dotenv/config";
 
 import * as cache from "../src/cache/market.cache.js";
 import {

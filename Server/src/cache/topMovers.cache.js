@@ -10,10 +10,8 @@ export function getCachedTopMovers() {
   const cachedData = cache.get(CACHE_KEY);
 
   if (!cachedData) {
-    console.log("No Cache")
     return null;
   }
-  console.log("Already Cached")
 
   return cachedData;
 }
@@ -32,7 +30,6 @@ export async function getOrRefreshTopMoversCache(fetchTopMovers) {
 
 export async function refreshTopMoversCache(fetchTopMovers) {
   if (inFlightRequest) {
-    console.log("[Cache] Sharing in-flight request");
     return inFlightRequest;
   }
 
@@ -45,8 +42,6 @@ export async function refreshTopMoversCache(fetchTopMovers) {
       }
 
       cache.set(CACHE_KEY, data, CACHE_TTL);
-
-      console.log("[Cache] UPDATED");
 
       return data;
     } finally {

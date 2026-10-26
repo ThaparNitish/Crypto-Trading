@@ -1,4 +1,6 @@
-import { getTopMovers } from "./src/services/topmovers.service.js";
+import "dotenv/config";
+import { getTopMovers } from "../src/services/topmovers.service.js";
+
 
 async function test() {
   try {

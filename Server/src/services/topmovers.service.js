@@ -29,15 +29,14 @@ function getTop5(tickers) {
       symbol: ticker.symbol.slice(0, -4),
       price: Number(ticker.lastPrice),
       priceChangePercent: Number(ticker.priceChangePercent),
+      highPrice: Number(ticker.highPrice),
+      lowPrice: Number(ticker.lowPrice),
     }));
 }
 
 export async function fetchTopMovers() {
-  console.log("[Cache] MISS - Calling API");
-
   const tickers = await get24HourTicker();
-  console.log("got result from api")
-
+  
   return getTop5(tickers);
 }
 
