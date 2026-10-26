@@ -1,12 +1,13 @@
-import { getTopMovers } from "../services/topmovers.service.js";
+import { refreshTopMovers } from "../services/topmovers.service.js";
 
 const REFRESH_INTERVAL = 30_000;
 
-export function startMarketRefresh() {
+export function startTopMoversRefreshJob() {
   const refresh = async () => {
     try {
-      await getTopMovers();
-      console.log("[Job] Market cache refreshed");
+      console.log("[Job] Top Movers refresh started")
+      await refreshTopMovers();
+      console.log("[Job] Top Movers refreshed");
     } catch (error) {
       console.error("[Job] Market refresh failed:", error.message);
     }

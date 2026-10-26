@@ -2,14 +2,14 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import cryptoRoutes from "./routes/crypto.routes.js"
-import { startMarketRefresh } from "./jobs/topmovers.refresh.js";
+import { startTopMoversRefreshJob } from "./jobs/topmovers.refresh.js";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-startMarketRefresh()
+startTopMoversRefreshJob()
 
 
 app.get("/", (req, res) => {
