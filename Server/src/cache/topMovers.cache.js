@@ -23,8 +23,18 @@ export async function getOrRefreshTopMoversCache(fetchTopMovers) {
   if (cachedData) {
     return cachedData;
   }
+  
+  const staleData = cache.getStale(CACHE_KEY)
 
-  return await refreshTopMoversCache(fetchTopMovers);
+  try {
+    return await refreshTopMoversCache(fetchTopMovers);
+  } catch (error) {
+    if (staleData !== null) {
+      return staleData;
+    }
+
+  throw error;
+  }
 }
 
 

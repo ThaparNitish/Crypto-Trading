@@ -22,7 +22,7 @@ function getTop5(tickers) {
       return !EXCLUDED_ASSETS.has(baseAsset);
     })
     .sort(
-      (a, b) => Number(b.quoteVolume) - Number(a.quoteVolume)
+      (a, b) => Math.abs(Number(b.priceChangePercent)) - Math.abs(Number(a.priceChangePercent))
     )
     .slice(0, 5)
     .map((ticker) => ({
@@ -36,7 +36,7 @@ function getTop5(tickers) {
 
 export async function fetchTopMovers() {
   const tickers = await get24HourTicker();
-  
+
   return getTop5(tickers);
 }
 

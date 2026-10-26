@@ -9,7 +9,7 @@ export function startTopMoversRefreshJob() {
     } catch (error) {
       console.error("[Job] Market refresh failed:", error.message);
     } finally{
-      setInterval(refresh, REFRESH_INTERVAL)
+      setTimeout(refresh, REFRESH_INTERVAL)
     }
   };
 
