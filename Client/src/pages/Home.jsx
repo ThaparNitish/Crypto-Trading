@@ -11,11 +11,11 @@ function Home() {
     async function loadTopMovers() {
       try {
         const response = await getTopMovers();
-        setTopMovers(response.data);
+        setTopMovers(response);
       } catch (error) {
         console.error("Failed to load top movers:", error);
         setTopMoversError(
-          error.response?.data.message || "Something went wrong."
+          error.response?.data.message || error.message ||"Something went wrong."
         );
       } finally {
         setLoadingTopMovers(false);
