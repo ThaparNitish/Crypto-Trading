@@ -10,7 +10,7 @@ export function validateTopMoversResponse(response) {
 
     const validCoins = response.data.filter((coin) => {
         if (!coin || typeof coin !== "object") {
-            
+            return  false;
         }
 
         if (typeof coin.symbol !== "string" ||
@@ -32,6 +32,25 @@ export function validateTopMoversResponse(response) {
             ) {
                 return false;
             }
+        if (
+            typeof coin.lowPrice !== "number" ||
+            !Number.isFinite(coin.lowPrice) ||
+            coin.lowPrice <= 0
+        ) {
+            return false;
+        }
+
+        if (
+            typeof coin.highPrice !== "number" ||
+            !Number.isFinite(coin.highPrice) ||
+            coin.highPrice <= 0
+        ) {
+            return false;
+        }
+
+        if(coin.lowPrice > coin.highPrice){
+            return false;
+        }
 
         return true;
     });

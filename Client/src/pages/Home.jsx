@@ -16,7 +16,7 @@ function Home() {
             setTopMovers(response);
         } catch (error) {
             setTopMoversError(
-                error.response?.data.message || error.message || "Something went wrong."
+                error.response?.data?.message || error.message || "Something went wrong."
         );
         } finally {
             setLoadingTopMovers(false);
